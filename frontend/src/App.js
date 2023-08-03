@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import {Routes,Route, Navigate} from "react-router-dom";
+import {Routes,Route} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { login} from './features/auth/authSlice'
 import {fetchPosts,fetchFollowingPosts} from './features/post/postSlice';
@@ -67,7 +67,7 @@ function App() {
         <div>
         <Header user={user}/>
           <Routes>
-            <Route path="/" element={user? <Navigate to ="/home"/>:<Login/>}/>
+            <Route path="/" element={<Login/>}/>
             <Route path="/home" element={<Home/>}/>
             <Route path={following} element={<Home/>}/>
             <Route path= {write} element={<BlogInput/>}/>

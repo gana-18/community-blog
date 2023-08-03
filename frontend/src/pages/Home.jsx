@@ -6,11 +6,6 @@ import {fetchFollowingPosts} from '../features/post/postSlice';
 
 function Home() {
   const {user} = useSelector((state) => state.auth);
-  useEffect(() => {
-    if(!user) {
-      window.location.href = "/";
-    }
-  }, [user]);
   const {posts} = useSelector((state) => state.post);
   const [followingPosts, setFollowingPosts] = useState([]);
   const location = useLocation();
