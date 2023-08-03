@@ -36,10 +36,10 @@ app.use(session({
 }))
 
 //static
-app.use(express.static(path.join(__dirname,'build')))
+app.use(express.static(path.join(__dirname,'public')))
 //static with urls
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'build','index.html'))
+    res.sendFile(path.join(__dirname,'public','index.html'))
 })
 
 //passport middleware
