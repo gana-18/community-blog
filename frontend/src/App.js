@@ -23,7 +23,7 @@ function App() {
     if (auth.status === 'idle') {
       dispatch(login());
     }
-    if(auth.status === 'succeeded' && auth.user){
+    if(auth.status === 'succeeded'){
       setUser(auth.user);
     }
     if(auth.status === 'failed'){
