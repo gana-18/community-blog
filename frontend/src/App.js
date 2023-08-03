@@ -13,21 +13,12 @@ import Bookmarks from "./pages/Bookmarks";
 import Following from "./pages/Following";
 function App() {
   const dispatch = useDispatch();
-  const [user,setUser] = useState(null);
+  const [user,setUser] = useState([]);
   const auth = useSelector((state) => state.auth);
   const [posts,setPosts] = useState(null);
   const post = useSelector((state) => state.post);
   const [followingPosts,setFollowingPosts] = useState(null);
-
   useEffect(() => {
-    if(!auth.user){
-      dispatch(login());
-    }
-    else{
-      setUser(auth.user);
-    }
-  }, [dispatch,auth.user]);
-  /*useEffect(() => {
     if (auth.status === 'idle') {
       dispatch(login());
     }
@@ -37,7 +28,7 @@ function App() {
     if(auth.status === 'failed'){
       setUser(null);
     }
-  }, [auth.status, dispatch]);*/
+  }, [auth.status, dispatch]);
 
 
   useEffect(() => {
@@ -68,7 +59,7 @@ function App() {
   }, [post.status, dispatch]);
   const write = user ? `/post/create/${user._id}` : '/';
   const following=user? `/home/following/${user._id}` : `/`;
-  console.log("user is",user)
+  console.log("auth is",auth)
   return (
     <>
         <div>
