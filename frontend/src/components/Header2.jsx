@@ -34,7 +34,7 @@ function Header2({user}) {
     <>
     <div className="nav2">
       <div className="logo">
-      <img src="http://localhost:3000/images/icons8-community-32 (1).png" alt="logo" />
+      <img src="/images/icons8-community-32 (1).png" alt="logo" />
           <h1>INSIDECODE</h1>
       </div>
       <nav>

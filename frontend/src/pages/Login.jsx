@@ -1,4 +1,3 @@
-import { Routes,Route,Navigate,Link} from "react-router-dom";
 function Login(){
   const googleAuth = () => {
     window.open(`${process.env.REACT_APP_API}/auth/google`,"_self")

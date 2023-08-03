@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAuthor, updateLikes,updateBookmarks} from '../features/post/postSlice';
+import { updateLikes,updateBookmarks} from '../features/post/postSlice';
 function PostCard(props) {
     const sanitizedContent = { __html: DOMPurify.sanitize(props.item?props.item.content:null) };
     const {user}=useSelector((state) => state.auth);

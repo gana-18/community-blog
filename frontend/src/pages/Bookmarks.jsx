@@ -1,4 +1,4 @@
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import {useEffect,useState} from "react";
 import Article from "../components/Article";
 function Bookmarks() {

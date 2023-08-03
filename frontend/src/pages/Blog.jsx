@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Editor } from '@tinymce/tinymce-react';
-import { useEffect } from 'react';
 const BlogInput = () => {
   const {user} = useSelector((state) => state.auth);
   const [blogData, setBlogData] = useState({
@@ -90,9 +89,9 @@ const BlogInput = () => {
             'insertdatetime media table paste code help wordcount',
           ],
           toolbar:
-            'undo redo | formatselect | bold italic backcolor | \
-                    alignleft aligncenter alignright alignjustify | \
-                    bullist numlist outdent indent | removeformat | help',
+            'undo redo | formatselect | bold italic backcolor |'+
+                    'alignleft aligncenter alignright alignjustify |'+
+                    'bullist numlist outdent indent | removeformat | help',
         }}
         onEditorChange={handleEditorChange}
       />

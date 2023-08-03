@@ -2,7 +2,7 @@ import { useEffect,useState } from "react";
 import {Routes,Route, Navigate} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { login} from './features/auth/authSlice'
-import {fetchPosts,fetchFollowingPosts,reset} from './features/post/postSlice';
+import {fetchPosts,fetchFollowingPosts} from './features/post/postSlice';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Header from "./components/Header";
@@ -18,17 +18,18 @@ function App() {
   const [posts,setPosts] = useState(null);
   const post = useSelector((state) => state.post);
   const [followingPosts,setFollowingPosts] = useState(null);
+
   useEffect(() => {
     if (auth.status === 'idle') {
       dispatch(login());
     }
-    if(auth.status === 'succeeded'){
+    if(auth.status === 'succeeded' && auth.user){
       setUser(auth.user);
     }
     if(auth.status === 'failed'){
       setUser(null);
     }
-  }, [auth.status, dispatch]);
+  }, [auth.status,auth.user,dispatch]);
 
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function App() {
     if(post.status === 'failed'){
       setPosts(null);
     }
-  }, [post.status, dispatch]);
+  }, [post.status,post.posts,dispatch]);
 
 
   
@@ -50,13 +51,15 @@ function App() {
       if(user)
       dispatch(fetchFollowingPosts(user._id));
     }
-    if(post.status === 'succeeded'){
+    if(post.status === 'succeeded' && post.followingPosts){
       setFollowingPosts(post.followingPosts);
     }
     if(post.status === 'failed'){
       setFollowingPosts(null);
     }
-  }, [post.status, dispatch]);
+  }, [post.status,post.followingPosts,user,dispatch]);
+
+  console.log(posts,followingPosts)
   const write = user ? `/post/create/${user._id}` : '/';
   const following=user? `/home/following/${user._id}` : `/`;
   return (

@@ -7,7 +7,6 @@ import Article from '../components/Article';
 function Profile() {
   const {id}=useParams()
   const [author,setAuthor]=useState(null)
-  const {user}=useSelector((state) => state.auth);
   const {posts}=useSelector((state) => state.post);
 
   const [userPosts,setUserPosts]=useState([])

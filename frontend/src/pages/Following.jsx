@@ -1,12 +1,11 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
 import AuthorCard from "../components/AuthorCard"
 function Following() {
-    const {user}=useSelector(state=>state.auth)
     const [followingClicked,setFollowingClicked]=useState(false)
     function clicked(){
         setFollowingClicked(prev=>!prev)
     }
+    console.log(followingClicked)
   return (
     <div className="Following">
         <div className="follow-card">
