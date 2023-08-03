@@ -21,7 +21,7 @@ const initialState = {
         if (response.status === 200) {
           const resObject = await response.json();
           console.log("Response from login:", resObject);
-          return resObject.user;
+          return resObject;
         } else {
           throw new Error("Authentication has failed!");
         }
@@ -47,7 +47,7 @@ const initialState = {
         if (response.status === 200) {
           const resObject = await response.json();
           console.log("Response from logout:", resObject);
-          return resObject.user;
+          return resObject;
         } else {
           throw new Error("Authentication has failed!");
         }
