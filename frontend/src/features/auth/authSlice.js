@@ -1,7 +1,7 @@
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
 
 const initialState = {
-    user: null,
+    user: [],
     status: "idle",
     error: null,
     };
@@ -21,6 +21,7 @@ export const login= createAsyncThunk('auth/login',async()=>{
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
+          console.log("resObject",resObject)
           return resObject.user;
         })
         .catch((err) => {

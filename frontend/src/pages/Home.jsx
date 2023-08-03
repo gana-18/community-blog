@@ -5,6 +5,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import {fetchFollowingPosts} from '../features/post/postSlice';
 
 function Home() {
+  const dispatch = useDispatch();
   const {user} = useSelector((state) => state.auth);
   useEffect(() => {
     if(!user) {
@@ -14,7 +15,6 @@ function Home() {
   const {posts} = useSelector((state) => state.post);
   const [followingPosts, setFollowingPosts] = useState([]);
   const location = useLocation();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if(!user) return;
