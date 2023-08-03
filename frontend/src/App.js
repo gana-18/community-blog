@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import {Routes,Route} from "react-router-dom";
+import {Routes,Route, Navigate} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { login} from './features/auth/authSlice'
 import {fetchPosts,fetchFollowingPosts} from './features/post/postSlice';
@@ -18,7 +18,6 @@ function App() {
   const [posts,setPosts] = useState(null);
   const post = useSelector((state) => state.post);
   const [followingPosts,setFollowingPosts] = useState(null);
-
   useEffect(() => {
     if (auth.status === 'idle') {
       dispatch(login());
@@ -29,7 +28,7 @@ function App() {
     if(auth.status === 'failed'){
       setUser(null);
     }
-  }, [auth.status,auth.user,dispatch]);
+  }, [auth.status, dispatch]);
 
 
   useEffect(() => {
@@ -42,7 +41,7 @@ function App() {
     if(post.status === 'failed'){
       setPosts(null);
     }
-  }, [post.status,post.posts,dispatch]);
+  }, [post.status, dispatch]);
 
 
   
@@ -51,15 +50,13 @@ function App() {
       if(user)
       dispatch(fetchFollowingPosts(user._id));
     }
-    if(post.status === 'succeeded' && post.followingPosts){
+    if(post.status === 'succeeded'){
       setFollowingPosts(post.followingPosts);
     }
     if(post.status === 'failed'){
       setFollowingPosts(null);
     }
-  }, [post.status,post.followingPosts,user,dispatch]);
-
-  console.log(posts,followingPosts)
+  }, [post.status, dispatch]);
   const write = user ? `/post/create/${user._id}` : '/';
   const following=user? `/home/following/${user._id}` : `/`;
   return (
@@ -67,7 +64,7 @@ function App() {
         <div>
         <Header user={user}/>
           <Routes>
-            <Route path="/" element={<Login/>}/>
+            <Route path="/" element={user? <Navigate to ="/home"/>:<Login/>}/>
             <Route path="/home" element={<Home/>}/>
             <Route path={following} element={<Home/>}/>
             <Route path= {write} element={<BlogInput/>}/>
