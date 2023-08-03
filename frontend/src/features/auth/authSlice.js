@@ -1,58 +1,62 @@
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
 
 const initialState = {
-    user: null,
+    user: [],
     status: "idle",
     error: null,
     };
 
-export const login= createAsyncThunk('auth/login',async()=>{
-    const response = await fetch(`${process.env.REACT_APP_API}/auth/login/success`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          return resObject.user;
-        })
-        .catch((err) => {
-          console.log(err);
+    export const login = createAsyncThunk('auth/login', async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API}/auth/login/success`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
         });
-        return response;
-
-})
-
-export const logout= createAsyncThunk('auth/logout',async()=>{
-    const response = await fetch(`${process.env.React_APP_API}/auth/logout`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
+    
+        if (response.status === 200) {
+          const resObject = await response.json();
+          console.log("Response from login:", resObject);
           return resObject.user;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-        return response;
+        } else {
+          throw new Error("Authentication has failed!");
+        }
+      } catch (err) {
+        console.error("Error in login:", err);
+        throw err;
+      }
+    });
+    
 
-})
+    export const logout = createAsyncThunk('auth/logout', async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API}/auth/logout`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        });
+    
+        if (response.status === 200) {
+          const resObject = await response.json();
+          console.log("Response from logout:", resObject);
+          return resObject.user;
+        } else {
+          throw new Error("Authentication has failed!");
+        }
+      } catch (err) {
+        console.error("Error in logout:", err);
+        throw err;
+      }
+    });
+    
 
 export const authSlice = createSlice({
     name: "auth",
