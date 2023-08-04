@@ -9,7 +9,6 @@ const passport=require('passport')
 const session=require('express-session')
 const MongoStore=require('connect-mongo')
 const connectDB=require('./config/db')
-const path=require('path')
 //passport config
 require('./config/passport')(passport)
 
@@ -35,8 +34,6 @@ app.use(session({
     })
 }))
 
-//static
-app.use(express.static(path.join(__dirname,'public')))
 
 //passport middleware
 app.use(passport.initialize())
